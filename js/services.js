@@ -17,4 +17,17 @@ async function createDatabase() {
     });
     const data = await response.json();
     return data;
+}
+  
+async function createTransaction(transaction) {
+    const response = await fetch("http://localhost:8000/transactions/create_transaction.php", {
+      method: "POST",
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(transaction),
+    });
+    const data = await response.json();
+    return data;
   }

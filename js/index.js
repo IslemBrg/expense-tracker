@@ -1,11 +1,33 @@
-balance = document.getElementById("balance");
-  moneyPlus = document.getElementById("money-plus");
-  moneyMinus = document.getElementById("money-minus");
-list = document.getElementById("list");
+let balance = document.getElementById("balance");
+let moneyPlus = document.getElementById("money-plus");
+let moneyMinus = document.getElementById("money-minus");
+let list = document.getElementById("list");
+let text = document.getElementById("text");
+let amount = document.getElementById("amount");
+let notification = document.getElementById("notification");
+let form = document.getElementById("form");
   
+let transactions = []
+
+async function addTransaction(e) {
+    e.preventDefault();
+    console.log(e);
+    if (text.value.trim() === "" || amount.value.trim() === "") {
+      showNotification();
+    } else {
+      const transaction = {
+        text: text.value,
+        amount: +amount.value,
+      };
+  
+      await createTransaction(transaction);
+      await init();
+      text.value = "";
+      amount.value = "";
+    }
+  }
 
 function addTransactionDOM(transaction) {
-    console.log("trans 1",transaction);
     const sign = transaction.amount < 0 ? "-" : "+";
     const item = document.createElement("li");
     item.classList.add(sign === "+" ? "plus" : "minus");
@@ -40,12 +62,13 @@ function updateValues() {
 async function init() {
     await createDatabase()
     list.innerHTML = "";
-    const transactions = await fetchTransactions();
+    transactions = await fetchTransactions();
     if (transactions.length > 0) {
-      console.log("transactions", transactions);
       transactions.forEach(addTransactionDOM);
       updateValues();
     }
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+form.addEventListener("submit", addTransaction);
