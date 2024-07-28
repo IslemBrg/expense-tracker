@@ -35,6 +35,22 @@ async function addTransaction(e) {
     amount.value = "";
   }
 }
+  e.preventDefault();
+  console.log(e);
+  if (text.value.trim() === "" || amount.value.trim() === "") {
+    showNotification();
+  } else {
+    const transaction = {
+      text: text.value,
+      amount: +amount.value,
+    };
+
+    await createTransaction(transaction);
+    await init();
+    text.value = "";
+    amount.value = "";
+  }
+}
 
 function addTransactionDOM(transaction) {
   const sign = transaction.amount < 0 ? "-" : "+";
@@ -49,7 +65,25 @@ function addTransactionDOM(transaction) {
   list.appendChild(item);
 }
 
+
 function updateValues() {
+  const amounts = transactions.map((transaction) => transaction.amount);
+  const total = amounts
+    .reduce((accumulator, value) => (accumulator += value), 0)
+    .toFixed(2);
+  const income = amounts
+    .filter((value) => value > 0)
+    .reduce((accumulator, value) => (accumulator += value), 0)
+    .toFixed(2);
+  const expense = (
+    amounts
+      .filter((value) => value < 0)
+      .reduce((accumulator, value) => (accumulator += value), 0) * -1
+  ).toFixed(2);
+  balance.innerText = ` DT ${total}`;
+  moneyPlus.innerText = ` DT ${income}`;
+  moneyMinus.innerText = ` DT ${expense}`;
+}
   const amounts = transactions.map((transaction) => transaction.amount);
   const total = amounts
     .reduce((accumulator, value) => (accumulator += value), 0)
