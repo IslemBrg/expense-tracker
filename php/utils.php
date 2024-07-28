@@ -45,10 +45,12 @@ function verifyJWT($jwt, $secretKey) {
         if ($payload['exp'] >= time()) {
             return $payload; // Token is valid
         } else {
-            echo json_encode(['status' => 401, 'message' => "Token expired"]);;
+            echo json_encode(['status' => 401, 'message' => "Token expired"]);
+            exit;
         }
     } else {
         echo json_encode(['status' => 401, 'message' => "Invalid token"]);
+        exit;
     }
 }
 

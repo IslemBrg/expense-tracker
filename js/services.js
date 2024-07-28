@@ -89,6 +89,7 @@ async function getUser() {
   });
   const data = await user.json();
   if (data.status === 401) {
+    localStorage.removeItem("token");
     return null;
   }
   return data;
