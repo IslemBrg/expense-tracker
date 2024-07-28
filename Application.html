@@ -15,9 +15,10 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Roboto:400,700&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
+<body class="sub_page">
   <div class="hero_area">
     <header class="header_section">
       <div class="container-fluid">
@@ -57,35 +58,63 @@
       </div>
     </header>
   </div>
-  <section class="about_section layout_padding">
+  <section class="service_section layout_padding">
     <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h6>
-              About
-            </h6>
-            <div class="custom_heading-container">
-              <h2>
-                Expense Tracker
-              </h2>
-              <hr>
-            </div>
-            <p>
-              Expense Tracker, a powerful expense tracking web application . This comprehensive tool is designed to assist users in effectively managing their financial transactions, including earnings, expenses, investments, and savings.</p>
-            <div>
+      <div class="d-flex flex-column align-items-end">
+        <div class="custom_heading-container">
+          <hr>
+          <h2>
+            Expense Tracker
+          </h2>
 
-            </div>
-          </div>
         </div>
-        <div class="col-md-6">
-          <div class="img-box">
-            <img src="images/about-img.png" alt="">
-          </div>
-        </div>
+        <p>
+          An expense tracker built using vanilla javascript to track your expenses dynamically.
+        </p>
       </div>
     </div>
+    <div class="container">
+      <div class="service_container layout_padding2">
+        <div class="container container1">
+          <div class="header">
+            <img src="https://i.ibb.co/jfScDTC/budget.png" alt="Expense Tracker" />
+            <div class="balance-container">
+              <h2>Your Balance</h2>
+              <h2 id="balance" class="balance"> DT 0.00</h2>
+            </div>
+          </div>
+          <div class="inc-exp-container">
+            <div>
+              <h4>Income</h4>
+              <p id="money-plus" class="money plus">+ DT 0.00</p>
+            </div>
+            <div>
+              <h4>Expenses</h4>
+              <p id="money-minus" class="money minus">- DT 0.00</p>
+            </div>
+          </div>
+          <h3>History</h3>
+          <ul id="list" class="list"></ul>
+          <h3>Add new transaction</h3>
+          <form id="form" class="my-2">
+            <div class="form-control my-2" style="height:20vh !important;">
+              <label for="text">Description</label>
+              <input type="text" id="text" placeholder="Enter description..." />
+            </div>
+            <div class="form-control" style="height:20vh !important;">
+              <label for="amount">Amount <br />
+                <small>(-100 = expense, 100 = income)</small></label>
+              <input type="number" id="amount" placeholder="Enter amount..." />
+            </div>
+            <button class="btn">Add transaction</button>
+          </form>
+        </div>
+        <div class="notification-container" id="notification">
+          <p>Please add a description and amount</p>
+        </div>
+      </div>
   </section>
+
   <section class="info_section layout_padding">
     <div class="container">
       <div>

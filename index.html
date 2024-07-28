@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  
+  
   <title>Expense Tracker</title>
   <link rel="icon" type="image/x-icon" href="/images/logo.png">
   <link rel="stylesheet" type="text/css"
@@ -24,7 +26,7 @@
           <a class="navbar-brand" href="index.html">
             <img src="images/logo.png" alt="">
             <span>
-              WebStudio
+              Expense Tracker
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -43,7 +45,13 @@
                 <li class="nav-item">
                   <a class="nav-link" href="contact.html">Contact us</a>
                 </li>
+                <li class="nav-item" id="nav-app-item">
+                  
+                </li>
               </ul>
+            </div>
+            <div class="quote_btn-container  d-flex justify-content-center" id="nav-right">
+              
             </div>
           </div>
         </nav>
@@ -67,6 +75,10 @@
           <p>
             An expense tracker built using vanilla javascript to track your expenses dynamically.
           </p>
+          <div id="index-buttons-area">
+          
+        </div>
+          
         </div>
         <div class="img-box">
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -88,46 +100,8 @@
       </div>
     </section>
   </div>
-  <section class="about_section layout_padding" id="index-wallet-container">
-    <h1 class="text-center">Expense Tracker</h1>
-    <div class="container container1">
-      <div class="header">
-        <img src="https://i.ibb.co/jfScDTC/budget.png" alt="Expense Tracker" />
-        <div class="balance-container">
-          <h2>Your Balance</h2>
-          <h2 id="balance" class="balance">DT 0.00</h2>
-        </div>
-      </div>
-      <div class="inc-exp-container">
-        <div>
-          <h4>Income</h4>
-          <p id="money-plus" class="money plus">+DT 0.00</p>
-        </div>
-        <div>
-          <h4>Expenses</h4>
-          <p id="money-minus" class="money minus">-DT 0.00</p>
-        </div>
-      </div>
-      <h3>History</h3>
-      <ul id="list" class="list"></ul>
-      <h3>Add new transaction</h3>
-      <form id="form" class="my-2">
-        <div class="form-control my-2" style="height:20vh !important;">
-          <label for="text">Description</label>
-          <input type="text" id="text" placeholder="Enter description..." />
-        </div>
-        <div class="form-control my-2" style="height:20vh !important;">
-          <label for="amount">Amount <br />
-            <small>(-100 = expense, 100 = income)</small></label>
-          <input type="number" id="amount" placeholder="Enter amount..." />
-        </div>
-        <button class="btn">Add transaction</button>
-      </form>
-    </div>
-    <div class="notification-container" id="notification">
-      <p>Please add a description and amount</p>
-    </div>
-</section>
+
+  <section class="about_section layout_padding" id="index-wallet-container"></section>
   <section class="about_section layout_padding">
     <div class="container">
       <div class="row">
@@ -159,6 +133,87 @@
       </div>
     </div>
   </section>
+  <section class="contact_section layout_padding-bottom" style="margin-top: 3vh;">
+    <div class="container">
+      <div class="d-flex flex-column align-items-end">
+        <div class="custom_heading-container">
+          <hr>
+          <h2>
+            Contact Us
+          </h2>
+        </div>
+      </div>
+      <div class="layout_padding-top layout_padding2-bottom">
+        <div class="row">
+          <div class="col-md-7">
+            <form action="">
+              <div class="contact_form-container">
+                <div>
+                  <div>
+                    <input type="text" placeholder="Name">
+                  </div>
+                  <div>
+                    <input type="email" placeholder="Email">
+                  </div>
+                  <div>
+                    <input type="text" placeholder="Phone Number">
+                  </div>
+                  <div class="">
+                    <input type="text" placeholder="Message" class="message_input">
+                  </div>
+                  <div class="mt-5">
+                    <button type="submit">
+                      send
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+          <div class="col-md-5">
+            <div class="map-box">
+              <div id="map">
+                <div class="map-responsive">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.6876246977477!2d10.190087199999999!3d36.8978205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34cc25bd5aff%3A0x495e852ae57f3ff5!2sTEK-UP%20Private%20College%20of%20Engineering%20%26%20Technology!5e0!3m2!1sen!2stn!4v1721581000606!5m2!1sen!2stn"
+                    width="600" height="300" frameborder="0" style="border:0; width: 100%;" allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact_items">
+
+        <a href="tel:+21622901462">
+          <div class="item ">
+            <div class="img-box box-2">
+
+            </div>
+            <div class="detail-box">
+              <p>
+                +216 22901462
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="mailto:islem.bargaoui.si@gmail.com">
+          <div class="item ">
+            <div class="img-box box-3" style="width:10vw;">
+
+            </div>
+            <div class="detail-box">
+              <p>
+                  islem.bargaoui.si@gmail.com
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
   <section class="info_section layout_padding">
     <div class="container">
       <div>
@@ -168,6 +223,7 @@
       </div>
     </div>
   </section>
+  <script type="text/javascript" src="js/utils.js"></script>
   <script type="text/javascript" src="js/services.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>

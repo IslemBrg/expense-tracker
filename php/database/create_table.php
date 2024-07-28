@@ -14,15 +14,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 include 'db.php';
 
 try {
+    // Create users table
+    $sql_users = "CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL
+    )";
+    $pdo->exec($sql_users);
+
+    // Create transactions table with owner column
     $sql_transactions = "CREATE TABLE IF NOT EXISTS transactions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         text TEXT NOT NULL,
-        amount REAL NOT NULL
+        amount REAL NOT NULL,
+        owner INTEGER NOT NULL,
+        FOREIGN KEY (owner) REFERENCES users(id)
     )";
     $pdo->exec($sql_transactions);
 
-    echo "Table created or modified successfully.";
+    echo "Tables created or modified successfully.";
 } catch (PDOException $e) {
-    die("Could not create or modify the table: " . $e->getMessage());
+    die("Could not create or modify the tables: " . $e->getMessage());
 }
 ?>

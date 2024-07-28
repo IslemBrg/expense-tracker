@@ -157,8 +157,8 @@ input[type="number"] {
 
 .delete-btn {
   cursor: pointer;
-  background-color: var(--minus-color);
-  color: var(--background-secondary-color);
+  background-color: white;
+  color: black;
   box-shadow: var(--box-shadow);
   border: 0;
   font-size: 22px;
@@ -169,17 +169,13 @@ input[type="number"] {
   top: 50%;
   right: 0;
   transform: translate(100%, -73%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.btn:focus,
-.delete-btn:focus {
-  outline: 0;
+  opacity: 1;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .list li:hover .delete-btn {
-  opacity: 1;
+  background-color: var(--minus-color);
+  color: var(--background-secondary-color)
 }
 
 .notification-container {
@@ -578,6 +574,9 @@ a:focus {
   top: 0;
   left: 0;
   background-image: url('https://wallpapercave.com/wp/wp5098796.jpg');
+  background-size: cover;
+  background-position: center;
+  
   z-index: -1;
 }
 

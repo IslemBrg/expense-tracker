@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Methods: DELETE');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
 // Handle preflight requests
@@ -14,24 +14,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 include '../database/db.php';
 include '../utils.php';
 // Read input data
-$input = json_decode(file_get_contents('php://input'), true);
+$id = $_GET['id'] ?? null;
 
-if (isset($input['text']) && isset($input['amount'])) {
-    $text = $input['text'];
-    $amount = $input['amount'];
-    $user_id = verifyJWT(getBearerToken(), $secretKey)['id'];
+$user_id = verifyJWT(getBearerToken(), $secretKey)['id'];
 
-    if (is_string($text) && is_numeric($amount)) {
+if ($id) {
+
+    if (is_numeric($id)) {
         try {
-            // Prepare and execute SQL statement
-            $stmt = $pdo->prepare("INSERT INTO transactions (text, amount, owner) VALUES (:text, :amount, :owner)");
-            $stmt->bindParam(':text', $text);
-            $stmt->bindParam(':amount', $amount);
+            $stmt = $pdo->prepare("SELECT * FROM transactions WHERE id = :id AND owner = :owner");
+            $stmt->bindParam(':id', $id);
             $stmt->bindParam(':owner', $user_id);
             $stmt->execute();
 
+            $transaction = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$transaction) {
+                // Transaction not found
+                echo json_encode(['status' => 404, 'message' => 'Transaction not found']);
+                exit;
+            }
+            
+            // Prepare and execute SQL statement
+            $stmt = $pdo->prepare("DELETE FROM transactions WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
             // Respond with success
-            echo json_encode(['status' => 201, 'id' => $pdo->lastInsertId()]);
+            echo json_encode(['status' => 201, 'message' => 'deleted']);
         } catch (PDOException $e) {
             // Respond with error
             echo json_encode(['status' => 500, 'message' => $e->getMessage()]);
