@@ -66,6 +66,26 @@ function updateValues() {
   balance.innerText = ` DT ${total}`;
   moneyPlus.innerText = ` DT ${income}`;
   moneyMinus.innerText = ` DT ${expense}`;
+
+  const welcomeParagraph = document.getElementById("welcome-paragraph");
+  if (!welcomeParagraph) return;
+  switch (true) {
+    case parseInt(income) > parseInt(expense):
+      welcomeParagraph.innerText = `
+        You're doing great 🙌 your income balance is greater than your expenses, Keep up the good work.
+        `;
+      break;
+    case parseInt(income) < parseInt(expense):
+      welcomeParagraph.innerText = `
+        You're spending more than you're earning 🙁 You should cut down on your expenses.
+        `;
+      break;
+    default:
+      welcomeParagraph.innerText = `
+        You're wallet is looking good 🙂
+        `;
+      break;
+  }
 }
 
 async function removeTransaction(id) {
@@ -76,6 +96,9 @@ async function removeTransaction(id) {
 
 function indexButtons() {
   const indexButtonsArea = document.getElementById("index-buttons-area");
+  const welcomeHeader = document.getElementById("welcome-header");
+  const welcomeParagraph = document.getElementById("welcome-paragraph");
+
   if (!indexButtonsArea) return;
 
   if (!currentUser) {
@@ -90,6 +113,17 @@ function indexButtons() {
               Login
             </a>
           </div>
+    `;
+    welcomeHeader.innerHTML = `
+    Discovering <br>
+            Expense Tracker
+    `;
+    welcomeParagraph.innerText = `
+    An expense tracker built using vanilla javascript to track your expenses dynamically.
+    `;
+  } else {
+    welcomeHeader.innerHTML = `
+    Welcome Back ${currentUser.name}
     `;
   }
 }
@@ -108,7 +142,7 @@ function navButton() {
           </div>
     `;
     navAppItem.innerHTML = `
-      <a class="nav-link" href="Application.html">Application </a>
+      <a class="nav-link" href="Application.html">Wallet </a>
     `;
   } else {
     navButton.innerHTML = `
@@ -122,7 +156,9 @@ function navButton() {
 }
 
 function populateIndexWallet() {
-  const indexWalletContainer = document.getElementById("index-wallet-container");
+  const indexWalletContainer = document.getElementById(
+    "index-wallet-container"
+  );
   if (!indexWalletContainer) return;
   indexWalletContainer.innerHTML = indexWalletHTML;
   balance = document.getElementById("balance");
@@ -143,12 +179,18 @@ async function init() {
   navButton();
   if (currentUser) {
     populateIndexWallet();
-    if(form) form.addEventListener("submit", addTransaction);
+    if (form) form.addEventListener("submit", addTransaction);
     list.innerHTML = "";
     transactions = await fetchTransactions();
     if (transactions.length > 0) {
       transactions.forEach(addTransactionDOM);
       updateValues();
+    } else {
+      const welcomeParagraph = document.getElementById("welcome-paragraph");
+      if (!welcomeParagraph) return;
+      welcomeParagraph.innerText = `
+        You have no transactions yet, add a transaction to get started.
+        `;
     }
   }
 }
